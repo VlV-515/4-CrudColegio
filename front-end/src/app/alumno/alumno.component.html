@@ -1,0 +1,41 @@
+<div class="container mt-5 shadow-lg p-3 mb-5 bg-body rounded">
+  <div class="title">
+    <h2>CRUD Alumnos</h2>
+  </div>
+  <hr>
+  <div class="mb-4">
+    <button routerLink="/home" type="button" class="btn btn-secondary me-2">Home</button>
+    <button (click)="btnNuevo(modal)" type="button" class="btn btn-success">Nuevo Alumno</button>
+  </div>
+  <div class="table">
+    <table class="table table-hover table-striped text-center">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre/s</th>
+          <th>Apellido/s</th>
+          <th>Genero</th>
+          <th>Fecha de nacimiento</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let alumno of alumnosArr; let i=index">
+          <td>{{alumno.idAlumno}}</td>
+          <td>{{alumno.nombreAlumno}}</td>
+          <td>{{alumno.apellidosAlumno}}</td>
+          <td>{{alumno.generoAlumno}}</td>
+          <td>{{alumno.fechaNacimientoAlumno}}</td>
+          <td>
+            <button (click)="btnEditar(modal,alumno)" type="button" class="btn btn-warning">Editar</button>
+            <button (click)="btnEliminar(alumno.idAlumno)" type="button" class="btn btn-danger ms-1">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+<ng-template #modal>
+  <app-formAlumno [title]="tittleModal" [alumno]="alumnoModal" (respForm)="getDataForm($event)"></app-formAlumno>
+</ng-template>

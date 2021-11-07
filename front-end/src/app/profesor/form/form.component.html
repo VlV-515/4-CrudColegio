@@ -1,0 +1,36 @@
+<form [formGroup]="formProfesor" (ngSubmit)="save(formProfesor.value)">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{title}}</h4>
+    <button (click)="cleanAndCloseModal()" type="button" class="close" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="mb-3">
+        <label for="nombreProfesor" class="form-label">Nombre</label>
+        <input formControlName="nombreProfesor" required type="text" class="form-control" name="nombreProfesor">
+      </div>
+
+      <div class="mb-3">
+        <label for="apellidosProfesor" class="form-label">Apellido</label>
+        <input formControlName="apellidosProfesor" required type="text" class="form-control" name="apellidosProfesor">
+      </div>
+
+
+      <div class="mb-3">
+        <label for="generoProfesor" class="form-label">Genero</label>
+        <select formControlName="generoProfesor" class="form-control" name="generoProfesor">
+          <option selected value='0'>Selecciona:</option>
+          <option value="H">H</option>
+          <option value="M">M</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button [disabled]="!formProfesor.valid" type="submit" class="btn btn-success">Guardar</button>
+      <button (click)="cleanAndCloseModal()" type="button" class="btn btn-danger">Cancelar</button>
+    </div>
+  </div>
+</form>

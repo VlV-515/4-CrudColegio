@@ -1,0 +1,37 @@
+<div class="container mt-5 shadow-lg p-3 mb-5 bg-body rounded">
+  <div class="title">
+    <h2>CRUD Grados</h2>
+  </div>
+  <hr>
+  <div class="mb-4">
+    <button routerLink="/home" type="button" class="btn btn-secondary me-2">Home</button>
+    <button (click)="btnNuevo(modal)" type="button" class="btn btn-success">Nuevo Grado</button>
+  </div>
+  <div class="table">
+    <table class="table table-hover table-striped text-center">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre/s</th>
+          <th>Profesor</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let grado of gradosArr; let i=index">
+          <td>{{grado.idGrado}}</td>
+          <td>{{grado.nombreGrado}}</td>
+          <td>{{getProfesor(grado.idProfesor)}}</td>
+          <td>
+            <button (click)="btnEditar(modal,grado)" type="button" class="btn btn-warning">Editar</button>
+            <button (click)="btnEliminar(grado.idGrado)" type="button" class="btn btn-danger ms-1">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+<ng-template #modal>
+  <app-formGrado [title]="tittleModal" [grado]="gradoModal" (respForm)="getDataForm($event)"></app-formGrado>
+</ng-template>

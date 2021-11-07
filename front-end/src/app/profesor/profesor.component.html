@@ -1,0 +1,40 @@
+<div class="container mt-5 shadow-lg p-3 mb-5 bg-body rounded">
+  <div class="title">
+    <h2>CRUD Profesor</h2>
+  </div>
+  <hr>
+  <div class="mb-4">
+    <button routerLink="/home" type="button" class="btn btn-secondary me-2">Home</button>
+    <button (click)="btnNuevo(modal)" type="button" class="btn btn-success">Nuevo profesor</button>
+  </div>
+  <div class="table">
+    <table class="table table-hover table-striped text-center">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre/s</th>
+          <th>Apellido/s</th>
+          <th>Genero</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let profesor of profesorsArr; let i=index">
+          <td>{{profesor.idProfesor}}</td>
+          <td>{{profesor.nombreProfesor}}</td>
+          <td>{{profesor.apellidosProfesor}}</td>
+          <td>{{profesor.generoProfesor}}</td>
+          <td>
+            <button (click)="btnEditar(modal,profesor)" type="button" class="btn btn-warning">Editar</button>
+            <button (click)="btnEliminar(profesor.idProfesor)" type="button"
+              class="btn btn-danger ms-1">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+<ng-template #modal>
+  <app-formProfesor [title]="tittleModal" [profesor]="profesorModal" (respForm)="getDataForm($event)"></app-formProfesor>
+</ng-template>

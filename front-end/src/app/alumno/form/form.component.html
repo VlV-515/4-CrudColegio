@@ -1,0 +1,42 @@
+<form [formGroup]="formAlumno" (ngSubmit)="save(formAlumno.value)">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{title}}</h4>
+    <button (click)="cleanAndCloseModal()" type="button" class="close" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="mb-3">
+        <label for="nombreAlumno" class="form-label">Nombre</label>
+        <input formControlName="nombreAlumno" required type="text" class="form-control" name="nombreAlumno">
+      </div>
+
+      <div class="mb-3">
+        <label for="apellidosAlumno" class="form-label">Apellido</label>
+        <input formControlName="apellidosAlumno" required type="text" class="form-control" name="apellidosAlumno">
+      </div>
+
+
+      <div class="mb-3">
+        <label for="generoAlumno" class="form-label">Genero</label>
+        <select formControlName="generoAlumno" class="form-control" name="generoAlumno">
+          <option value='0' selected>Selecciona:</option>
+          <option value="H">H</option>
+          <option value="M">M</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="fechaNacimientoAlumno" class="form-label">Apellido</label>
+        <input formControlName="fechaNacimientoAlumno" required type="date" class="form-control"
+          name="fechaNacimientoAlumno">
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="!formAlumno.valid" type="submit" class="btn btn-success">Guardar</button>
+    <button (click)="cleanAndCloseModal()" type="button" class="btn btn-danger">Cancelar</button>
+  </div>
+</form>
