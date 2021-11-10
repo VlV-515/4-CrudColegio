@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -24,9 +25,10 @@ export class ProfesorComponent implements OnInit {
   }
 
   refreshTable(): void {
-    this.profesorService.getProfesores().subscribe((resp: ProfesorInt[]) => {
-      this.profesorsArr = resp;
-    });
+    this.profesorService.getProfesores().subscribe(
+      (resp: ProfesorInt[]) => (this.profesorsArr = resp),
+      (err: HttpErrorResponse) => alert('Ocurrio un error inesperado')
+    );
   }
   btnNuevo(modal: any): void {
     //Mandamos el profesor como indefinido para que se sepa que es uno nuevo
@@ -35,10 +37,13 @@ export class ProfesorComponent implements OnInit {
     this.modal.open(modal);
   }
   nuevoprofesor(data: ProfesorInt): void {
-    this.profesorService.nuevoProfesor(data).subscribe((resp) => {
-      alert('profesor agregado =)');
-      this.refreshTable();
-    });
+    this.profesorService.nuevoProfesor(data).subscribe(
+      (resp) => {
+        alert('profesor agregado =)');
+        this.refreshTable();
+      },
+      (err: HttpErrorResponse) => alert('Ocurrio un error inesperado')
+    );
   }
   btnEditar(modal: any, profesor: ProfesorInt) {
     this.tittleModal = 'Editar profesor';
@@ -46,10 +51,13 @@ export class ProfesorComponent implements OnInit {
     this.modal.open(modal);
   }
   editarprofesor(data: ProfesorInt): void {
-    this.profesorService.editarProfesor(data).subscribe((resp) => {
-      alert('profesor modificado =)');
-      this.refreshTable();
-    });
+    this.profesorService.editarProfesor(data).subscribe(
+      (resp) => {
+        alert('profesor modificado =)');
+        this.refreshTable();
+      },
+      (err: HttpErrorResponse) => alert('Ocurrio un error inesperado')
+    );
   }
   getDataForm(data: ProfesorInt): void {
     //Verificamos si tiene id, osea si es un nuevo
@@ -62,10 +70,13 @@ export class ProfesorComponent implements OnInit {
   btnEliminar(id: number): void {
     const ask = window.confirm('¿Seguro de eliminar este profesor?');
     if (ask) {
-      this.profesorService.eliminaProfesor(id).subscribe((resp) => {
-        alert('profesor eliminado =)');
-        this.refreshTable();
-      });
+      this.profesorService.eliminaProfesor(id).subscribe(
+        (resp) => {
+          alert('profesor eliminado =)');
+          this.refreshTable();
+        },
+        (err: HttpErrorResponse) => alert('Ocurrio un error inesperado')
+      );
     }
   }
 }
